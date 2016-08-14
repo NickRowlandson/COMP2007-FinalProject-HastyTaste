@@ -30,8 +30,7 @@ namespace COMP2007_FinalProject_HastyTaste.Controllers
         public ActionResult AddToCart(int id)
         {
             // Retrieve the album from the database
-            var addedItem = storeDB.MenuItems
-                .Single(MenuItem => MenuItem.ID == id);
+            var addedItem = storeDB.MenuItems.Single(MenuItem => MenuItem.ID == id);
 
             // Add it to the shopping cart
             var cart = ShoppingCart.GetCart(this.HttpContext);
@@ -50,8 +49,7 @@ namespace COMP2007_FinalProject_HastyTaste.Controllers
             var cart = ShoppingCart.GetCart(this.HttpContext);
 
             // Get the name of the album to display confirmation
-            string itemName = storeDB.Carts
-                .Single(item => item.RecordId == id).MenuItem.Title;
+            string itemName = storeDB.Carts.Single(item => item.RecordId == id).MenuItem.Title;
 
             // Remove from cart
             int itemCount = cart.RemoveFromCart(id);

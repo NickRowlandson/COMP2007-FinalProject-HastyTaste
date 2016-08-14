@@ -28,10 +28,8 @@ namespace COMP2007_FinalProject_HastyTaste.Models
         }
         public void AddToCart(MenuItem menuItem)
         {
-            // Get the matching cart and album instances
-            var cartItem = storeDB.Carts.SingleOrDefault(
-                c => c.CartId == ShoppingCartId
-                && c.ItemId == menuItem.ID);
+            // Get the matching cart and item instances
+            var cartItem = storeDB.Carts.SingleOrDefault(c => c.CartId == ShoppingCartId && c.ItemId == menuItem.ID);
 
             if (cartItem == null)
             {
@@ -57,9 +55,7 @@ namespace COMP2007_FinalProject_HastyTaste.Models
         public int RemoveFromCart(int id)
         {
             // Get the cart
-            var cartItem = storeDB.Carts.Single(
-                cart => cart.CartId == ShoppingCartId
-                && cart.RecordId == id);
+            var cartItem = storeDB.Carts.Single(cart => cart.CartId == ShoppingCartId && cart.RecordId == id);
 
             int itemCount = 0;
 
@@ -81,8 +77,7 @@ namespace COMP2007_FinalProject_HastyTaste.Models
         }
         public void EmptyCart()
         {
-            var cartItems = storeDB.Carts.Where(
-                cart => cart.CartId == ShoppingCartId);
+            var cartItems = storeDB.Carts.Where(cart => cart.CartId == ShoppingCartId);
 
             foreach (var cartItem in cartItems)
             {
@@ -93,8 +88,7 @@ namespace COMP2007_FinalProject_HastyTaste.Models
         }
         public List<Cart> GetCartItems()
         {
-            return storeDB.Carts.Where(
-                cart => cart.CartId == ShoppingCartId).ToList();
+            return storeDB.Carts.Where(cart => cart.CartId == ShoppingCartId).ToList();
         }
         public int GetCount()
         {
@@ -112,8 +106,7 @@ namespace COMP2007_FinalProject_HastyTaste.Models
             // sum all album price totals to get the cart total
             decimal? total = (from cartItems in storeDB.Carts
                               where cartItems.CartId == ShoppingCartId
-                              select (int?)cartItems.Count *
-                              cartItems.MenuItem.Price).Sum();
+                              select (int?)cartItems.Count * cartItems.MenuItem.Price).Sum();
 
             return total ?? decimal.Zero;
         }
